@@ -963,6 +963,15 @@ export default function App() {
           <h2 className="text-[30vw] font-display leading-none">ZADDY</h2>
         </div>
       </footer>
+      
+      {/* Client Protection Watermark */}
+      <div className="fixed bottom-4 right-4 z-[9999] pointer-events-none opacity-30 select-none text-right shadow-black drop-shadow-md">
+        <p className="font-mono text-[8px] md:text-[10px] text-white tracking-[0.15em] uppercase leading-relaxed font-semibold">
+          Prototype developed by<br/>
+          Surgical Edge Solutions LLC<br/>
+          <span className="text-gold/80 font-bold tracking-[0.2em]">SES-CLT-001</span>
+        </p>
+      </div>
     </div>
   );
 }

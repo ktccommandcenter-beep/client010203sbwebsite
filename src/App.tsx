@@ -100,13 +100,26 @@ export default function App() {
 
   const handleAuthSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Master Password Check
     if (passcodeInput === 'TredaeZaddy1234!@#$') {
       setIsAuthenticated(true);
       setAuthError(false);
-    } else {
-      setAuthError(true);
-      setPasscodeInput('');
+      return;
     }
+    
+    // Temporary Client Password Check (Expires March 18, 2026 at 5:00 PM EST)
+    if (passcodeInput === 'Bullard2026') {
+      const expirationDate = new Date('2026-03-18T17:00:00-04:00');
+      if (new Date() < expirationDate) {
+        setIsAuthenticated(true);
+        setAuthError(false);
+        return;
+      }
+    }
+
+    setAuthError(true);
+    setPasscodeInput('');
   };
 
   if (!isAuthenticated) {

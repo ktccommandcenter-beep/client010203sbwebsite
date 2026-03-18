@@ -166,6 +166,9 @@ const ScrollExpandMedia = ({
     const video = videoRef.current;
     if (!video) return;
 
+    // Explicitly force play for mobile browsers that ignore the autoPlay prop
+    video.play().catch(e => console.log("Autoplay on mount prevented:", e));
+
     const handleTimeUpdate = () => {
       // Loop the video at the 17-second mark
       if (video.currentTime >= 17) {

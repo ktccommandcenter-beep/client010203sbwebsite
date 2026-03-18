@@ -21,6 +21,16 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Hide iPhone/Safari native video playback overlays */
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    opacity: 0 !important;
+}
+
 @theme {
   --color-void: #070708;
   --color-depth: #0C0C0E;

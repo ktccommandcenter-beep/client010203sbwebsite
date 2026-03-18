@@ -272,8 +272,7 @@ const ScrollExpandMedia = ({
                         muted
                         playsInline
                         preload='auto'
-                        className='w-full h-full object-cover rounded-xl grayscale'
-                        controls={false}
+                        className='w-full h-full object-cover rounded-xl grayscale pointer-events-none'
                         disablePictureInPicture
                         disableRemotePlayback
                       />

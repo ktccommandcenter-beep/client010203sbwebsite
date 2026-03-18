@@ -10,6 +10,10 @@ import { PRODUCTS } from './constants';
 import { ArrowRight, Shield, Zap, Droplets, Activity, Brain, Heart, ChevronRight } from 'lucide-react';
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcodeInput, setPasscodeInput] = useState('');
+  const [authError, setAuthError] = useState(false);
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -93,6 +97,56 @@ export default function App() {
       clearInterval(slideTimer);
     };
   }, []);
+
+  const handleAuthSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passcodeInput === 'TredaeZaddy1234!@#$') {
+      setIsAuthenticated(true);
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+      setPasscodeInput('');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-void flex flex-col items-center justify-center selection:bg-gold selection:text-void font-sans">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center max-w-sm w-full px-6"
+        >
+          <img src="https://www.zaddyproducts.com/cdn/shop/files/Zaddy-Logo.png?v=1641479507&width=2048" alt="ZADDY" className="w-48 mb-12 invert opacity-90" />
+          
+          <form onSubmit={handleAuthSubmit} className="w-full flex flex-col gap-6">
+            <div className="flex flex-col gap-2 relative">
+              <label htmlFor="passcode" className="text-[10px] tracking-[0.2em] uppercase font-mono text-white/50 ml-1">Client Access Terminal</label>
+              <input 
+                id="passcode"
+                type="password" 
+                value={passcodeInput}
+                onChange={(e) => { setPasscodeInput(e.target.value); setAuthError(false); }}
+                placeholder="Enter Passcode..."
+                className={`w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-gold/50 transition-colors font-mono text-sm tracking-wider ${authError ? 'border-red-500/50 text-red-400' : ''}`}
+                autoFocus
+              />
+              {authError && <p className="text-red-400/80 text-[10px] uppercase tracking-wider font-mono absolute -bottom-5 left-1">Invalid Passcode</p>}
+            </div>
+            
+            <button 
+              type="submit"
+              className="mt-2 w-full bg-gold/10 hover:bg-gold/20 text-gold border border-gold/20 hover:border-gold/40 rounded-lg py-3 flex items-center justify-center gap-3 transition-all duration-300 font-display italic tracking-widest uppercase text-sm group"
+            >
+              Enter System
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-void selection:bg-gold selection:text-void">

@@ -2,25 +2,15 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
+import ScrollExpandMedia from './components/ui/scroll-expansion-hero';
 import ProductCard from './components/ProductCard';
 import SectionHeader from './components/SectionHeader';
 import { Testimonials } from './components/Testimonials';
 import { PRODUCTS } from './constants';
 import { ArrowRight, Shield, Zap, Droplets, Activity, Brain, Heart, ChevronRight } from 'lucide-react';
-import Metric from './components/Metric';
 
 export default function App() {
-  const heroRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15]);
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeDomain, setActiveDomain] = useState(0);
@@ -149,136 +139,20 @@ export default function App() {
 
       <div className="noise-overlay" />
       <Navbar />
-
-      {/* Hero Section - Ferrari Aesthetic */}
-      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-black">
-        <div className="scanline" />
-        <motion.div 
-          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="absolute inset-0 z-0"
-        >
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
-          >
-            <source src="https://storage.googleapis.com/aistudio-build-assets/zaddy-brand-film.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
-        </motion.div>
-
-        {/* Technical Data Overlays */}
-        <div className="absolute top-32 right-12 z-30 hidden xl:block">
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.2, duration: 1.2 }}
-            className="space-y-10"
-          >
-            <div className="border-l border-gold/20 pl-6">
-              <p className="font-mono text-[9px] text-gold/40 uppercase tracking-[0.4em] mb-2">Purity Index</p>
-              <p className="font-mono text-[16px] text-white font-medium">99.98% <span className="text-[9px] text-gold/30">ISO-CERT</span></p>
-            </div>
-            <div className="border-l border-gold/20 pl-6">
-              <p className="font-mono text-[9px] text-gold/40 uppercase tracking-[0.4em] mb-2">Bio-Availability</p>
-              <p className="font-mono text-[16px] text-white font-medium">MAX-OPTIMIZED</p>
-            </div>
-            <div className="border-l border-gold/20 pl-6">
-              <p className="font-mono text-[9px] text-gold/40 uppercase tracking-[0.4em] mb-2">System Status</p>
-              <p className="font-mono text-[16px] text-ok flex items-center gap-3 font-medium">
-                <span className="w-2 h-2 rounded-full bg-ok animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                NOMINAL
-              </p>
-            </div>
-          </motion.div>
+      
+      {/* New Ferrari-style Hero Section with Scroll Expansion */}
+      <ScrollExpandMedia
+        mediaType="video"
+        mediaSrc="https://storage.googleapis.com/store-screenapp-production/vid/69ba34576262acd5d799dc86/72d91e85-0228-40fc-8dd8-fbd3f1ad6640.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=GOOG1EINEQV5X2QGY62PSZMBMUR7IGGVLKNDB6ABP5GL6O6FKO76DWA2IE3SB%2F20260318%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260318T051416Z&X-Amz-Expires=604800&X-Amz-Signature=07c38d977bb0be5bc45199c5e033eff28ef4556363b7cf042ca89f2cfee326be&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%2272d91e85-0228-40fc-8dd8-fbd3f1ad6640.mp4%22%3B%20filename%2A%3D%20UTF-8%27%271c86aef6b37c468bb3de0fde3c940932.mp4%3B&response-content-type=video%2Fmp4&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        bgImageSrc="https://www.zaddyproducts.com/cdn/shop/files/ZADDY_NEW_PRODUCT_IMAGES_1000x.jpg?v=1751001479"
+        logoSrc="https://www.zaddyproducts.com/cdn/shop/files/Zaddy-Logo.png?v=1641479507&width=2048"
+        date="ZADDY CORE SYSTEM"
+        scrollToExpand="Initialize Sequence"
+      >
+        <div className="w-full flex justify-center pb-24">
+           {/* Space under the hero before content flows naturally */}
         </div>
-
-        <div className="container-custom relative z-20 w-full">
-          <div className="max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, x: -80 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="overflow-hidden mb-10">
-                <motion.div 
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="flex items-center gap-4"
-                >
-                  <span className="font-mono text-gold text-[10px] tracking-[0.6em] uppercase font-bold">Engineered for Dominance</span>
-                  <div className="w-12 h-[1px] bg-gold/30" />
-                  <span className="font-mono text-white/40 text-[9px] tracking-[0.4em] uppercase">SYSTEM_REV_4.0</span>
-                </motion.div>
-              </div>
-              
-              <motion.div
-                style={{ opacity: logoOpacity }}
-                className="mb-12"
-              >
-                <img 
-                  src="https://www.zaddyproducts.com/cdn/shop/files/Zaddy-Logo.png?v=1641479507&width=512" 
-                  alt="ZADDY" 
-                  className="w-48 md:w-96 invert brightness-200"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-
-              <div className="flex flex-col md:flex-row items-start md:items-end gap-12 md:gap-20">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.5 }}
-                  transition={{ duration: 1.2, delay: 1.2 }}
-                  className="max-w-sm"
-                >
-                  <p className="text-white text-[15px] md:text-[17px] font-light leading-relaxed border-l border-white/10 pl-8">
-                    The world is designed to weaken you. ZADDY is the counter-measure. 
-                    Clinical-grade, hormone-protective, and uncompromising.
-                  </p>
-                </motion.div>
-                
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 1.4 }}
-                >
-                  <a href="#shop" className="group flex items-center gap-8 text-white hover:text-gold transition-all duration-700">
-                    <span className="text-[13px] font-bold uppercase tracking-[0.4em]">Explore the System</span>
-                    <div className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center group-hover:border-gold group-hover:bg-gold group-hover:text-void transition-all duration-700 shadow-2xl bg-white/5 backdrop-blur-md">
-                      <ChevronRight size={28} />
-                    </div>
-                  </a>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-12 right-12 z-30 hidden md:flex flex-col items-center gap-6"
-        >
-          <span className="font-mono text-[9px] text-white/30 uppercase tracking-[0.5em] vertical-text rotate-180">Scroll</span>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-gold/50 to-transparent" />
-        </motion.div>
-
-        {/* Hero Bottom Indicators */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-30">
-          {[0, 1, 2].map((i) => (
-            <div 
-              key={i} 
-              className={`h-[2px] w-12 transition-all duration-500 ${activeSlide === i ? 'bg-gold' : 'bg-white/20'}`}
-            />
-          ))}
-        </div>
-      </section>
+      </ScrollExpandMedia>
 
       {/* Brand Film Section - High Energy */}
       <section className="relative h-[80vh] bg-black overflow-hidden border-y border-border">
@@ -599,6 +473,7 @@ export default function App() {
               viewport={{ once: true }}
               className="md:col-span-2 md:row-span-1 relative p-12 glass-panel rounded-[40px] group hover:border-gold/30 transition-all duration-700 overflow-hidden"
             >
+              <div className="absolute inset-0 liquid-gradient animate-morph opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" />
               <div className="relative z-10 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-4 mb-8">
@@ -628,6 +503,7 @@ export default function App() {
               transition={{ delay: 0.2 }}
               className="md:col-span-1 md:row-span-2 relative p-12 glass-panel rounded-[40px] group hover:border-gold/30 transition-all duration-700 overflow-hidden flex flex-col justify-between"
             >
+              <div className="absolute inset-0 liquid-gradient animate-morph opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" style={{animationDelay: '-2s'}} />
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center text-gold border border-gold/20">
@@ -669,6 +545,7 @@ export default function App() {
               transition={{ delay: 0.4 }}
               className="md:col-span-2 md:row-span-1 relative p-12 glass-panel rounded-[40px] group hover:border-gold/30 transition-all duration-700 overflow-hidden"
             >
+              <div className="absolute inset-0 liquid-gradient animate-morph opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" style={{animationDelay: '-4s'}} />
               <div className="relative z-10 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-4 mb-8">
@@ -726,7 +603,7 @@ export default function App() {
             <h2 className="text-[64px] md:text-[96px] text-editorial mb-8">Zaddy <span className="text-gold italic">Apparel.</span></h2>
             
             <p className="text-sub text-[18px] leading-relaxed mb-12 font-light">
-              For the man who operates without excuses. Zaddy Apparel is engineered for high-performance comfort without sacrificing authority. B.D.E. (Bold. Dominant. Effortless.)
+              For the man who operates without excuses. Zaddy Apparel is engineered for high-performance comfort without sacrificing authority. <span className="font-display italic text-gold">B.D.E. (Bold. Dominant. Effortless.)</span>
             </p>
             
             <div className="space-y-6 mb-16">
@@ -816,11 +693,6 @@ export default function App() {
                 alt="Quiz" 
                 className="w-full h-full object-cover opacity-50"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-gold/20 backdrop-blur-md flex items-center justify-center text-gold border border-gold/30 animate-pulse">
-                  <Brain size={32} />
-                </div>
-              </div>
             </div>
             {/* Background Decoration */}
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-gold/5 rounded-full blur-[100px]" />
@@ -839,7 +711,7 @@ export default function App() {
               className="relative aspect-[4/5] overflow-hidden rounded-[40px]"
             >
               <img 
-                src="https://images.unsplash.com/photo-1614633833026-07205c9d633f?q=80&w=2000&auto=format&fit=crop" 
+                src="https://www.zaddyproducts.com/cdn/shop/files/ZADDY_NEW_PRODUCT_IMAGES_1000x.jpg?v=1751001479" 
                 alt="The Zaddy Lifestyle" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 referrerPolicy="no-referrer"
@@ -929,15 +801,14 @@ export default function App() {
             </div>
           </div>
 
-          {/* Image Side */}
-          <div className="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-0 group overflow-hidden">
+          <div className="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-0 group overflow-hidden bg-black/50">
             <img 
-              src="https://images.unsplash.com/photo-1579126038823-7983ac305914?q=80&w=2000&auto=format&fit=crop" 
-              alt="Zaddy Health" 
-              className="split-banner-img"
+              src="https://www.zaddyproducts.com/cdn/shop/files/ChatGPT_Image_Jun_23_2025_01_08_36_PM_1000x.png?v=1750920964" 
+              alt="Zaddy Health Multivitamin" 
+              className="split-banner-img object-contain scale-100 group-hover:scale-105"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-void/20 group-hover:bg-transparent transition-colors duration-700" />
+            <div className="absolute inset-0 bg-void/10 group-hover:bg-transparent transition-colors duration-700" />
             
             {/* Technical Overlay */}
             <div className="absolute top-12 right-12 flex flex-col items-end gap-2">

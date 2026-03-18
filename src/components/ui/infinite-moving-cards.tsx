@@ -11,7 +11,7 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    quote: string;
+    quote: React.ReactNode;
     name: string;
     title: string;
   }[];

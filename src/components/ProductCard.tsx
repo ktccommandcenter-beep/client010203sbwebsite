@@ -34,29 +34,41 @@ export default function ProductCard({ product, featured }: ProductCardProps) {
       </div>
       
       <div className="p-10 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-[24px] font-display leading-tight text-white group-hover:text-gold transition-colors">
-            {product.name}
-          </h3>
-          {product.vertical === 'skin' && (
-            <div className="mt-1 font-mono text-[9px] text-gold tracking-[0.1em] uppercase">
-              TESTOSTERONE-SAFE • NO ENDOCRINE DISRUPTORS • ORGANIC INFUSED
-            </div>
-          )}
-          <div className="flex flex-col items-end">
-            <span className="text-white font-medium text-[18px]">
-              ${product.price.toFixed(2)}
-            </span>
-            {product.compareAtPrice && (
-              <span className="text-muted line-through text-[12px]">
-                ${product.compareAtPrice.toFixed(2)}
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="flex justify-between items-start gap-4">
+            <h3 className="text-[22px] font-display leading-tight text-white group-hover:text-gold transition-colors flex-1">
+              {product.name.includes("B.D.E.") ? (
+                <>
+                  <span className="font-display italic text-gold">B.D.E. </span>
+                  {product.name.replace("B.D.E. ", "")}
+                </>
+              ) : (
+                product.name
+              )}
+            </h3>
+            <div className="flex flex-col items-end shrink-0">
+              <span className="text-white font-medium text-[18px]">
+                ${product.price.toFixed(2)}
               </span>
-            )}
+              {product.compareAtPrice && (
+                <span className="text-muted line-through text-[12px]">
+                  ${product.compareAtPrice.toFixed(2)}
+                </span>
+              )}
+            </div>
           </div>
+          {/* Removed the extra thick descriptive text to de-crowd the layout */}
         </div>
         
         <p className="text-sub text-[14px] mb-8 leading-relaxed font-light">
-          {product.benefit}
+          {product.benefit.includes("Bold. Dominant. Effortless.") ? (
+            <>
+              <span className="font-display italic text-gold">Bold. Dominant. Effortless.</span>
+              {product.benefit.replace("Bold. Dominant. Effortless.", "")}
+            </>
+          ) : (
+            product.benefit
+          )}
         </p>
         
         <div className="mt-auto">

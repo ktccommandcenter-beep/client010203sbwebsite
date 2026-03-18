@@ -16,7 +16,7 @@ export const PRODUCTS: Product[] = [
     name: 'Hydra+ • Facial Moisturizer',
     benefit: 'Elite Hydration. Matte Finish. For the man who operates without excuses.',
     price: 35,
-    image: 'https://www.zaddyproducts.com/cdn/shop/files/moisturizer_1_1000x.jpg?v=1750995952',
+    image: 'https://www.zaddyproducts.com/cdn/shop/files/2_1000x.jpg?v=1751254417',
     vertical: 'skin',
     tag: 'Skin · Essentials',
     description: 'Apply it daily and move like you own the room. Clinical-grade, hormone-protective.',

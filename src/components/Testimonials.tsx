@@ -41,8 +41,11 @@ const zaddyTestimonials = [
     title: "Tech Founder",
   },
   {
-    quote:
-      "The B.D.E. briefs are exactly what they claim to be. Bold, dominant, and effortless. The fit is second-skin and the confidence boost is real. Zaddy is more than grooming; it's a standard.",
+    quote: (
+      <>
+        "<span className="font-display italic text-gold">The B.D.E. briefs</span> are exactly what they claim to be. <span className="font-display italic text-gold">Bold, dominant, and effortless.</span> The fit is second-skin and the confidence boost is real. Zaddy is more than grooming; it's a standard."
+      </>
+    ),
     name: "Xavier Knight",
     title: "Professional Athlete",
   },

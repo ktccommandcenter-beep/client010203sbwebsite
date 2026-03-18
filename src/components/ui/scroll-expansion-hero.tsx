@@ -38,6 +38,7 @@ const ScrollExpandMedia = ({
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState<boolean>(false);
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
+  const [timeOpacity, setTimeOpacity] = useState<number>(0);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -177,6 +178,14 @@ const ScrollExpandMedia = ({
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
     };
+  }, []);
+
+  // Fade in logo automatically after 8 seconds of playback
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeOpacity(1);
+    }, 8000);
+    return () => clearTimeout(timer);
   }, []);
 
   // Reversed Expansion Logic: Start Large (95vw) -> Shrink to smaller (45vw desktop)
@@ -324,9 +333,11 @@ const ScrollExpandMedia = ({
                   <motion.img
                     src={logoSrc}
                     alt="Logo"
-                    className="max-w-[60vw] md:max-w-[40vw] object-contain invert transition-none pointer-events-none"
+                    className={`max-w-[60vw] md:max-w-[40vw] object-contain invert pointer-events-none ${
+                      timeOpacity > 0 ? "transition-opacity duration-[3000ms] ease-in-out" : "transition-none"
+                    }`}
                     style={{ 
-                      opacity: scrollProgress,
+                      opacity: Math.max(scrollProgress, timeOpacity),
                       scale: 0.5 + scrollProgress * (isMobileState ? 0.5 : 0.8),
                       y: scrollProgress * -50
                     }}

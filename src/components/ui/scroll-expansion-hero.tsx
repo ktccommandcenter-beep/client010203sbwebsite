@@ -271,9 +271,13 @@ const ScrollExpandMedia = ({
                         autoPlay
                         muted
                         playsInline
+                        loop
                         preload='auto'
                         className='w-full h-full object-cover rounded-xl grayscale pointer-events-none'
                         disablePictureInPicture
+                        tabIndex={-1}
+                        onContextMenu={(e) => e.preventDefault()}
+                        {...({ 'webkit-playsinline': 'true' } as any)}
                         disableRemotePlayback
                       />
                       <div
